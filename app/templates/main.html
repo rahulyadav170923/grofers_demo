@@ -1,0 +1,30 @@
+{% include "header.html" %}
+<body>
+    <div class="container">
+        <h1>Hey There ! , I'm Rahul</h1>
+        <br>
+        <div>
+            <p>My Balance is :
+                <inline id='balance'>{{data['balance']}}</inline>
+            </p>
+        </div>
+        <div>
+            Transaction Amount:
+            <input type="number" id="amount">
+            <button type="button"> Credit/Debit </button>
+        </div>
+        <div>
+            <ul>
+                {% for transaction in data['transactions']%}
+                {% if transaction > 0 %}
+                <li>Rs {{transaction}} is credited to your account.</li>
+                {% else %}
+                <li>Rs {{ transaction | abs }} is debited from your account.</li>
+                {% endif %}
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</body>
+<script src={{url_for('static',filename='js/firebase.js')}} type="text/javascript"  charset="utf-8"></script>
+{% include "footer.html" %}
