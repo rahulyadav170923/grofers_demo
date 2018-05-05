@@ -1,2 +1,3 @@
 from app import app
-app.socketio.run(app.app)
+from config import port
+app.socketio.run(app.app, port = port)
