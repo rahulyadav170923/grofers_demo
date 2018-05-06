@@ -7,5 +7,5 @@ Installation Steps :
     pip3 install -r requirements.txt
 
 Run the app server:
-    (using pyhton version 3.6.4)
+    (using python version 3.6.4)
     python run.py
