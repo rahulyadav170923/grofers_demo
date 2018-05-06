@@ -2,6 +2,8 @@ from flask import Flask, render_template, request
 from flask_socketio import SocketIO, send, emit
 from config import secret_key
 from app.controllers.database import data
+import json
+
 
 app = Flask(__name__)
 
@@ -14,6 +16,14 @@ socketio = SocketIO(app)
 def main():
    if request.method == 'GET':
       return render_template('main.html', data=data)
+
+@app.route('/transaction', methods = ['POST'])
+def transation():
+    amount= int(json.loads(request.data)['amount'])
+    data['balance'] = data['balance'] + amount
+    data['transactions'].append(amount)
+    socketio.emit('change', data, broadcast=True)
+    return "Amount has been debited/credited"
 
 @socketio.on('message')
 def handle_message(message):

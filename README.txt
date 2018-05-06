@@ -19,7 +19,8 @@ Database: It is a volatile server local key-value store.
 
 Events: 
     'transaction' : This is a custom event triggered when client send transaction infomation to server.
-    The imformation contains the amount credited/debited . The data is used change balance and append transaction.
+    The imformation contains the amount credited/debited . The data is used change balance and append transaction
+    and return new values of stores keys.
 
     'messages' : Inbuilt event to recieve and send messages through websockets.
 
