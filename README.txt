@@ -6,6 +6,11 @@ Installation Steps :
     source venv/bin/activate
     pip3 install -r requirements.txt
 
+Setting environment variables (Add this in your ~/.bashrc):
+    export secret = "" #enter your secret key for app
+    export PORT = ""   #Choose port for your app
+    source ~/.bashrc
+    
 Run the app server:
     (using python version 3.6.4)
     python run.py
@@ -28,4 +33,9 @@ Events:
 
 Endpoints:
     '/': This endpoint serves html response where we can interact with the webpage. 
-
+    '/transaction': 
+        request type = POST
+        data format = Json
+        ex: {
+                'amount' : '10',
+            }
