@@ -11,6 +11,8 @@ app = Flask(__name__)
 app.config['SECRET_KEY'] = secret_key
 
 socketio = SocketIO(app)
+from app.controllers.eventhandlers import transaction_handler
+
 
 @app.route('/',methods = ['POST', 'GET'])
 def main():
@@ -19,19 +21,6 @@ def main():
 
 @app.route('/transaction', methods = ['POST'])
 def transation():
-    amount= int(json.loads(request.data)['amount'])
-    data['balance'] = data['balance'] + amount
-    data['transactions'].append(amount)
-    socketio.emit('change', data, broadcast=True)
+    transaction_handler(json.loads(request.data))
     return "Amount has been debited/credited"
 
-@socketio.on('message')
-def handle_message(message):
-    print('received message: ' + message)
-
-@socketio.on('transaction')
-def handle_transaction(json):
-    amount= int(json['amount'])
-    data['balance'] = data['balance'] + amount
-    data['transactions'].append(amount)
-    emit('change', data, broadcast=True)
