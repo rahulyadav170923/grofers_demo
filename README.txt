@@ -31,11 +31,27 @@ Events:
 
     'json' :  Inbuilt event to recieve and send data in json format through websockets.
 
-Endpoints:
+Endpoints: 
     '/': This endpoint serves html response where we can interact with the webpage. 
-    '/transaction': 
+    
+    # These endpoints are just to test our nosql store
+
+    '/money': 
         request type = POST
         data format = Json
         ex: {
                 'amount' : '10',
             }
+    '/transaction': 
+        request type = POST
+        data format = Json
+        ex: {
+                'address' : 'gurgaon',
+                'mobile' : '93048302984'
+            }
+
+
+Firebase : (Nosql store)
+    store : Contains all the data in the store.
+    get() : Method to get data for a specific key from staore.
+    set() : Method to update data for a specific key in the store and communicate changes to the clients. 

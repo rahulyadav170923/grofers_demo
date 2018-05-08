@@ -3,16 +3,26 @@ var socket = io.connect(window.location.protocol+'//' + document.domain + ':' + 
         socket.send('yo');
     });
 
-    socket.on('change', function (data) {
-    console.log(data);
+    socket.on('error', function (msg) {
+        console.log(msg);
+    });
+
+    socket.on('money', function (data) {
+    // console.log(data);
     $("#balance").text(data['balance']);
-    $('ul').empty();
+    $('ul#transaction').empty();
     data['transactions'].map((key) => {
         if (key < 0)
-            $("ul").append('<li>Rs ' + Math.abs(key) + ' is debited form your account.</li>');
+            $("ul#transaction").append('<li>Rs ' + Math.abs(key) + ' is debited form your account.</li>');
         else
-            $("ul").append('<li>Rs ' + key + ' is credited to your account.</li>');
+            $("ul#transaction").append('<li>Rs ' + key + ' is credited to your account.</li>');
     });
+});
+
+socket.on('contact', function (data) {
+    $('ul#contact').empty();
+    $("ul#contact").append('<li>Address : ' + data['address'] + '</li>');
+    $("ul#contact").append('<li>Mobile No : ' + data['mobile'] + '</li>');
 });
 
 $("button").click(function () {
